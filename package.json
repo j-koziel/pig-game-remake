@@ -1,0 +1,24 @@
+{
+  "name": "pig-game-remake",
+  "version": "1.0.0",
+  "description": "Remake of pig-game project from JavaScript course",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-koziel/pig-game-remake.git"
+  },
+  "keywords": [
+    "project",
+    "game",
+    "learning",
+    "javascript"
+  ],
+  "author": "Jonathan Koziel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j-koziel/pig-game-remake/issues"
+  },
+  "homepage": "https://github.com/j-koziel/pig-game-remake#readme"
+}
