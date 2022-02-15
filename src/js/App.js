@@ -14,16 +14,28 @@ activePlayer = 0;
 const diceEl = document.querySelector('.dice');
 const player1El = document.querySelector(`.player--0`);
 const player2El = document.querySelector(`.player--1`);
+const score0 = document.getElementById('score--0');
+const score1 = document.getElementById('score--1');
+
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 const btnNewGame = document.querySelector('.btn--new');
 
 function newGame() {
-  diceEl.classList.add('hidden');
+  // State Variables
   currentScore = 0;
   scores = [0, 0];
   playing = true;
   activePlayer = 0;
+
+  // Resetting all elements
+  diceEl.classList.add('hidden');
+  score0.textContent = 0;
+  score1.textContent = 0;
+  player1El.classList.remove('player--winner');
+  player2El.classList.remove('player--winner');
+  player1El.classList.add('player--active');
+  player2El.classList.remove('player--active');
 }
 
 newGame();
@@ -35,6 +47,17 @@ function switchPlayer() {
   activePlayer = activePlayer === 0 ? 1 : 0;
   player1El.classList.toggle('player--active');
   player2El.classList.toggle('player--active');
+}
+
+function playerWon() {
+  if (scores[activePlayer] >= 100) {
+    playing = false;
+    activePlayer === 0
+      ? player1El.classList.add('player--winner')
+      : player2El.classList.add('player--winner');
+  } else {
+    switchPlayer();
+  }
 }
 
 // Main Functionality
@@ -56,7 +79,14 @@ function diceRoll() {
   }
 }
 
-function holdScore() {}
+function holdScore() {
+  if (playing) {
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+    playerWon();
+  }
+}
 
 // Event Handling
 btnRoll.addEventListener('click', diceRoll);
