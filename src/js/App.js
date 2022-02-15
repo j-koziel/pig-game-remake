@@ -21,6 +21,7 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 const btnNewGame = document.querySelector('.btn--new');
 
+// Resetting the game
 function newGame() {
   // State Variables
   currentScore = 0;
@@ -36,11 +37,14 @@ function newGame() {
   player2El.classList.remove('player--winner');
   player1El.classList.add('player--active');
   player2El.classList.remove('player--active');
+  document.getElementById(`current--0`).textContent = 0;
+  document.getElementById(`current--1`).textContent = 0;
 }
-
 newGame();
 
 // Helper functions
+
+// Switches the player once the hold button is pressed or the current player rolls a 1
 function switchPlayer() {
   currentScore = 0;
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -49,12 +53,17 @@ function switchPlayer() {
   player2El.classList.toggle('player--active');
 }
 
+// Gives the player who won some styling for the user to be able to distinguish that they have won
 function playerWon() {
   if (scores[activePlayer] >= 100) {
+    // Set the state to false as the game has finished
     playing = false;
+
+    // Checking for which player won
     activePlayer === 0
       ? player1El.classList.add('player--winner')
       : player2El.classList.add('player--winner');
+    // If the player did not win, it is the next player's turn
   } else {
     switchPlayer();
   }
@@ -63,6 +72,8 @@ function playerWon() {
 // Main Functionality
 function diceRoll() {
   if (playing) {
+    // Unhide dice
+    diceEl.classList.remove('hidden');
     // Generate the dice roll
     const diceNum = Math.trunc(Math.random() * 6) + 1;
 
@@ -79,11 +90,13 @@ function diceRoll() {
   }
 }
 
+// Holds the score for the current player
 function holdScore() {
   if (playing) {
     scores[activePlayer] += currentScore;
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
+    // Check if the player had won
     playerWon();
   }
 }
