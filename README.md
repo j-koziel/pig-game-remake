@@ -2,6 +2,6 @@
 
 This is a remake of the pig game project from Jonas Schmedtmann's Javascript course.
 
-https://pig-game-remake.netlify.app/
+<a href="https://pig-game-remake.netlify.app/" target="_blank"></a>
 
 https://www.udemy.com/course/the-complete-javascript-course/
